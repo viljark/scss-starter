@@ -3,17 +3,9 @@
 /**
  * Setup: run npm install to install the dependencies
  * 
- * gulp sass - compile default theme
- * gulp watch - compile & watch default theme
- * gulp sass --theme light - compile light theme, you can specify any theme, if the folder & .scss file exist
- * gulp watch --theme light - compile & watch light theme, you can specify any theme, if the folder & .scss file exist
- * gulp clean-translations - searches unused key/translation pairs in language files and removes them
- * gulp translations - gets latest translations from googleDocs excel and writes them in language files
- * gulp styleguide - generates styleguide
- * gulp serve - compile & watch styleguide.
- * gulp serve --nosass - compile & watch styleguide but skip sass watching (useful when you have separate sass watchers running)
- * gulp serve --nobrowsersync - compile & watch styleguide but don't launch server
- * gulp serve --watchtheme - compile & watch styleguide and also listen to styleguide style changes
+ * gulp scss - compile scss
+ * gulp watch-scss - compile & watch default scss
+ * gulp serve - start browserSyn server and compile & watch your project
  *
  */
 
@@ -22,13 +14,9 @@ var gulp = require('gulp'),
     plumber = require('gulp-plumber'),
     rename = require('gulp-rename'),
     sass = require('gulp-sass'),
-    path = require('path'),
     postcss = require('gulp-postcss'),
     autoprefixer = require('autoprefixer'),
     cssnano = require('cssnano'),
-    argv = require('yargs').argv,
-    async = require('async'),
-    fs = require('fs'),
     browserSync = require('browser-sync').create()
 
 var paths = {
@@ -53,16 +41,13 @@ const AUTOPREFIXER_BROWSERS = [
     'android >= 4.4',
     'bb >= 10'
   ];
-var processors = [  
-    autoprefixer({AUTOPREFIXER_BROWSERS}),
+var processors = [
+    autoprefixer(AUTOPREFIXER_BROWSERS),
     cssnano()
 ];
 
-/*
-    Parses all theme sass files and application.scss and generates css
-    Used primeraly with "serve" task
- */
-gulp.task('sass', function() {
+
+gulp.task('scss', function() {
     return gulp.src([paths.scss + "**/*.scss"])
         .pipe(plumber({errorHandler: onError}))
         .pipe(sass())
@@ -78,18 +63,17 @@ gulp.task('sass', function() {
 });
 
 /*
-    Listens to changes in all scss files and calls sass parse
+    Listens to changes in all scss files and calls scss parse
  */
-gulp.task('watch', ['sass'], function() {
-    gulp.watch(paths.scss + '**/*.scss', ['sass']);
+gulp.task('watch-scss', ['scss'], function() {
+    gulp.watch(paths.scss + '**/*.scss', ['scss']);
 });
 
-gulp.task('serve', ['sass'], function() {
+gulp.task('serve', ['watch-scss'], function() {
 
     browserSync.init({
         server: "."
     });
 
-    gulp.watch(paths.scss + '**/*.scss', ['sass']);
     gulp.watch("**/*.html").on('change', browserSync.reload);
 });
