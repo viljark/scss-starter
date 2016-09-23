@@ -1,0 +1,182 @@
+// Grid
+//
+// The grid is responsive. You can change the behaviour of the grid in certain breakpoints by adding a modifier class.
+//
+// The last modifier in the class is connected to a breakpoint.
+//
+// .grid - this is the main class.
+// .grid--equalheight - use this class to stretch column children to 100% height. The child has to have <code>flex: 1 0 auto;</code> set.
+// .grid--reverse-xs - use this class if you want to reverse the order of your grid columns. Does not work in IE9.
+// .grid--top-xs - use this class if you want to align your columns to top.
+// .grid--middle-xs - use this class if you want to align your columns to middle.
+// .grid--bottom-xs - use this class if you want to align your columns to bottom.
+// .grid--start-xs - use this class if you want to align your columns to start.
+// .grid--center-xs - use this class if you want to align your columns to center.
+// .grid--end-xs - use this class if you want to align your columns to end.
+// .grid--around-xs - use this class if you want to distribute the remaining space in your grid around columns. Does not work in IE9.
+// .grid--between-xs - use this class if you want to distribute the remaining space in your grid between columns. Does not work in IE9.
+// .grid--no-gutter - use this class to disable all gutters.
+// .grid--no-vertical-gutter - use this class to disable vertical gutters.
+// .grid--no-horizontal-gutter - use this class disable horizontal gutters.
+//
+@mixin make-grid($name) {
+  @for $i from 1 through $grid-columns{
+    .col--#{$name}-#{$i} {
+      max-width: 100% / $grid-columns * $i;
+      order: auto;
+      flex-basis: 100% / $grid-columns * $i;
+    }
+  }
+  @for $i from 1 through $grid-columns {
+    .col--offset-#{$name}-#{$i} {
+      margin-left: 100% / $grid-columns * $i;
+    }
+  }
+  .col--#{$name} {
+    width: auto;
+    max-width: 100%;
+    flex-grow: 0;
+    flex-basis: auto;
+  }
+  .col--top-#{$name} {
+    vertical-align: top;
+    align-self: flex-start;
+  }
+  .col--middle-#{$name} {
+    vertical-align: middle;
+    align-self: center;
+  }
+  .col--bottom-#{$name} {
+    vertical-align: bottom;
+    align-self: flex-end;
+  }
+  .grid--reverse-#{$name} {
+    flex-direction: row-reverse;
+  }
+  .grid--start-#{$name} {
+    text-align: start;
+    justify-content: flex-start;
+  }
+  .grid--center-#{$name} {
+    text-align: center;
+    justify-content: center;
+  }
+  .grid--end-#{$name} {
+    text-align: right;
+    text-align: end;
+    justify-content: flex-end;
+  }
+  .grid--top-#{$name} {
+    align-items: flex-start;
+    > [class^="col--"],
+    > [class*=" col--"] {
+      vertical-align: top;
+    }
+  }
+  .grid--middle-#{$name} {
+    align-items: center;
+    > [class^="col--"],
+    > [class*=" col--"] {
+      vertical-align: middle;
+    }
+  }
+  .grid--bottom-#{$name} {
+    align-items: flex-end;
+    > [class^="col--"],
+    > [class*=" col--"] {
+      vertical-align: bottom;
+    }
+  }
+  .grid--around-#{$name} {
+    justify-content: space-around;
+  }
+  .grid--between-#{$name} {
+    justify-content: space-between;
+  }
+  .col--original-#{$name} {
+    order: 0;
+  }
+  .col--first-#{$name} {
+    order: -1;
+  }
+  .col--last-#{$name} {
+    order: 1;
+  }
+}
+.grid {
+  display: flex;
+  flex-direction: row;
+  margin-right: $grid-gutter * 0.5 * -1;
+  margin-bottom: $grid-gutter * -1;
+  margin-left: $grid-gutter * 0.5 * -1;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+}
+.grid--equalheight {
+  > [class^="col--"],
+  > [class*=" col--"] {
+    display: flex;
+  }
+}
+.grid--no-gutter {
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  > [class^="col--"],
+  > [class*=" col--"] {
+    margin-bottom: 0;
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+.grid--no-horizontal-gutter {
+  margin-right: 0;
+  margin-left: 0;
+  > [class^="col--"],
+  > [class*=" col--"] {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+.grid--no-vertical-gutter {
+  margin-bottom: 0;
+  > [class^="col--"],
+  > [class*=" col--"] {
+    margin-bottom: 0;
+  }
+}
+[class*=" col--"],
+[class^="col--"] {
+  display: inline-block;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: $grid-gutter;
+  padding-right: $grid-gutter * 0.5;
+  padding-left: $grid-gutter * 0.5;
+  outline: none;
+  letter-spacing: 0;
+  text-align: left;
+  vertical-align: top;
+  flex: 0 0 auto;
+  flex-basis: 100%;
+}
+.col--no-vertical-gutter {
+  margin-bottom: 0;
+}
+@include make-grid(lg);
+@media only screen and (max-width: $break-lg) {
+  @include make-grid(md);
+}
+@media only screen and (max-width: $break-md) {
+  @include make-grid(sm);
+}
+@media only screen and (max-width: $break-sm) {
+  @include make-grid(xs);
+}
+@media print {
+  .grid,
+  [class*=" col--"],
+  [class^="col--"] {
+    display: block;
+  }
+}
