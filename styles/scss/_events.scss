@@ -1,0 +1,33 @@
+.event {
+  margin: 2rem;
+  padding: 2rem;
+  background: #fff;
+  h2 {
+    font-size: 50px;
+    text-transform: uppercase;
+    font-weight: normal;
+  }
+  &__img {
+    display: block;
+    max-width: 100%;
+  }
+  &__date {
+    font-size: 30px;
+  }
+  &__choose {
+    display: block;
+    padding: 1rem 2rem;
+    border: 1px solid $main-color;
+    background: $main-color;
+    font-size: 25px;
+    color: #fff;
+    line-height: normal;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+  }
+  &__choose--alt {
+    background: #fff;
+    color: $main-color;
+  }
+}

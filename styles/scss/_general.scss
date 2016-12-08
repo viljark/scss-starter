@@ -1,6 +1,15 @@
 html {
   box-sizing: border-box;
+  background: #eee;
+  font-size: 18px;
+  color: #fff;
+  font-family: 'Lora', serif;
+  color: #000;
 }
 *, *:before, *:after {
   box-sizing: inherit;
+}
+
+a {
+  color: $main-color;
 }

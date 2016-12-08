@@ -1,0 +1,25 @@
+.main-nav {
+  align-self: flex-end;
+  flex-basis: 100%;
+  &__items {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  &__item {
+    display: block;
+    margin-right: 2rem;
+    padding: 0 1rem .4rem;
+    border-bottom: 4px solid transparent;
+    color: #fff;
+    text-decoration: none;
+    &:hover {
+      border-bottom-color: #fff;
+    }
+  }
+  &__item--active {
+    border-bottom-color: #fff;
+  }
+}

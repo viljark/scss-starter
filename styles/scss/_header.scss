@@ -1,0 +1,31 @@
+.header {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  position: relative;
+  background: $main-color url(../img/background.png) no-repeat;
+  min-height: 470px;
+  padding: 2.5rem 2.5rem 0;
+  color: #fff;
+  &__logo {
+    width: 145px;
+    height: 182px;
+    margin-right: 2.5rem;
+    background: url(../img/logo.png) no-repeat;
+    a {
+      display: block;
+      height: 100%;
+      text-indent: -99999em;
+    }
+
+  }
+  &__intro {
+    width: 600px;
+    font-size: 18px;
+    line-height: 1.3rem;
+    h1 {
+      font-weight: 400;
+      font-size: 45px;
+    }
+  }
+}
