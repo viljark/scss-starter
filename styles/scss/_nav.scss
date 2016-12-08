@@ -15,8 +15,10 @@
     border-bottom: 4px solid transparent;
     color: #fff;
     text-decoration: none;
+    white-space: nowrap;
     &:hover {
       border-bottom-color: #fff;
+      color: #fff;
     }
   }
   &__item--active {

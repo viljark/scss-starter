@@ -2,6 +2,7 @@ html {
   box-sizing: border-box;
   background: #eee;
   font-size: 18px;
+  line-height: 1.4;
   color: #fff;
   font-family: 'Lora', serif;
   color: #000;
@@ -12,4 +13,7 @@ html {
 
 a {
   color: $main-color;
+  &:hover {
+    color: darken($main-color, 20%);
+  }
 }

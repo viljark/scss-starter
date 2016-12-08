@@ -1,11 +1,14 @@
 .event {
   margin: 2rem;
   padding: 2rem;
+  border: 3px solid #fff;
   background: #fff;
-  h2 {
+  &__heading {
+    margin-top: 0;
     font-size: 50px;
     text-transform: uppercase;
     font-weight: normal;
+    line-height: normal;
   }
   &__img {
     display: block;
@@ -17,7 +20,7 @@
   &__choose {
     display: block;
     padding: 1rem 2rem;
-    border: 1px solid $main-color;
+    border: 3px solid $main-color;
     background: $main-color;
     font-size: 25px;
     color: #fff;
@@ -25,9 +28,23 @@
     text-transform: uppercase;
     text-decoration: none;
     text-align: center;
+    &:hover {
+        border-color: darken($main-color, 20%);
+        background-color: darken($main-color, 20%);
+        color: #fff;
+    }
   }
   &__choose--alt {
     background: #fff;
     color: $main-color;
+  }
+  &--active {
+    border-color: $main-color;
+  }
+}
+
+@media only screen and (max-width: $break-xs) {
+  .grid > div:last-child {
+    order: -1;
   }
 }
